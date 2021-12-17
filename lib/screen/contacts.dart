@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apptest3/screen/add_contacts.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter_apptest3/screen/contact_details.dart';
+import 'package:flutter_apptest3/screen/coin.dart';
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _ContactsState extends State<Contacts> {
   @override
   void initState(){
     super.initState();
-    _ref = FirebaseDatabase.instance.reference().child('Contacts').orderByChild('name');
+    _ref = FirebaseDatabase.instance.reference().child('Contacts').orderByChild('name').startAt("Jayden Lee").endAt("Jayden Lee");
     _ref.once().then((DataSnapshot snapshot){
       Map<dynamic, dynamic> values = snapshot.value;
       values.forEach((key, value) {
@@ -68,7 +69,7 @@ class _ContactsState extends State<Contacts> {
             //SearchMethod(text);
           },
           style: TextStyle(color: Colors.white),
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
@@ -90,7 +91,7 @@ class _ContactsState extends State<Contacts> {
         // ),
         actions: <Widget>[
           !searchState ? IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.search,
               color: Colors.white,
             ),
@@ -101,7 +102,7 @@ class _ContactsState extends State<Contacts> {
             },
           ):
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.cancel,
               color: Colors.white,
             ),
@@ -112,19 +113,34 @@ class _ContactsState extends State<Contacts> {
             },
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.add_call,
               color: Colors.white,
             ),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (_){
                 return AddContacts();
+                //return CoinAnimation();
               }));
             },
           ),
         ],
       ),
-      body: Container(
+      // body: Column(
+      //   children: <Widget>[
+      //     Flexible(
+      //       child: FirebaseAnimatedList(
+      //           query: _ref,
+      //           itemBuilder: (_, DataSnapshot snapshot,
+      //           Animation<double> animation, int x) {
+      //             return ListTile(
+      //               subtitle: Text(snapshot.value.toString()),
+      //             );
+      //           }),
+      //     )
+      //   ],
+      // )
+      body: SizedBox(
         height: double.infinity,
         child: FirebaseAnimatedList(
           query: _ref, itemBuilder: (BuildContext context,

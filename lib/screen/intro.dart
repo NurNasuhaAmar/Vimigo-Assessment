@@ -5,6 +5,8 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 
 class Intro extends StatefulWidget {
+  const Intro({Key? key}) : super(key: key);
+
   @override
   _IntroState createState() => _IntroState();
 }
@@ -17,10 +19,9 @@ class _IntroState extends State<Intro> {
     // TODO: implement initState
     super.initState();
     slides.add(
-      new Slide(
+      Slide(
         title: "Vimigo Assessment",
-        description:
-        "By : NurNasuha Binti Amar",
+        description: "By : NurNasuha Binti Amar",
         pathImage: "assets/logo.png",
       ),
     );
@@ -42,7 +43,7 @@ class _IntroState extends State<Intro> {
               children: [
                 Container(
                   padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),
@@ -54,19 +55,19 @@ class _IntroState extends State<Intro> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 3),
+                  margin: const EdgeInsets.only(top: 3),
                   child: Text(
                     currentSlide.title.toString(),
-                    style: TextStyle(color: Colors.black, fontSize: 25),
+                    style: const TextStyle(color: Colors.black, fontSize: 25),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 30,
                   ),
                   child: Text(
                     currentSlide.description.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 14,
                       height: 1.5,
@@ -75,7 +76,7 @@ class _IntroState extends State<Intro> {
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     top: 15,
                     left: 20,
                     right: 20,
@@ -94,24 +95,36 @@ class _IntroState extends State<Intro> {
                 // ),
                 Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.fromLTRB(60, 15, 60, 5),
+                  margin: const EdgeInsets.fromLTRB(60, 15, 60, 5),
                   child: ListTile(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
                     tileColor: Colors.red[600],
-                    leading: Icon(Icons.search, color: Colors.white,),
-                    title: Text('Search Contact',
-                      style: TextStyle(color: Colors.white),),
+                    leading: const Icon(
+                      Icons.search,
+                      color: Colors.white,
+                    ),
+                    title: const Text(
+                      'Search Contact',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
                 Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.fromLTRB(60, 10, 60, 5),
+                  margin: const EdgeInsets.fromLTRB(60, 10, 60, 5),
                   child: ListTile(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
                     tileColor: Colors.red[600],
-                    leading: Icon(Icons.add_call, color: Colors.white,),
-                    title: Text('Add New Contact',
-                      style: TextStyle(color: Colors.white),),
+                    leading: const Icon(
+                      Icons.add_call,
+                      color: Colors.white,
+                    ),
+                    title: const Text(
+                      'Add New Contact',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ],
@@ -135,15 +148,15 @@ class _IntroState extends State<Intro> {
         "Next",
         style: TextStyle(color: Colors.black),
       ),
-      renderDoneBtn: Text(
+      renderDoneBtn: const Text(
         "Done",
         style: TextStyle(color: Colors.black),
       ),
       colorActiveDot: Colors.white,
       sizeDot: 8.0,
       typeDotAnimation: dotSliderAnimation.SIZE_TRANSITION,
-      listCustomTabs: this.renderListCustomTabs(),
-      scrollPhysics: BouncingScrollPhysics(),
+      listCustomTabs: renderListCustomTabs(),
+      scrollPhysics: const BouncingScrollPhysics(),
       //shouldHideStatusBar: false,
       onDonePress: () => Navigator.pushReplacement(
         context,
