@@ -31,13 +31,13 @@ class _ContactDetailsState extends State<ContactDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contact Details'),
+        title: const Text('Contact Details'),
         backgroundColor: Colors.red[600],
       ),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
-          margin: EdgeInsets.all(15),
+          margin: const EdgeInsets.all(15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

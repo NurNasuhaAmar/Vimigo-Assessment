@@ -9,7 +9,6 @@ class CoinAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var image = Flame.images.load('animation.png');
     var _animation = SpriteAnimation.fromFrameData(
         Flame.images.fromCache('animation.png'),
         SpriteAnimationData.sequenced(amount: 12, stepTime: 0.2, textureSize: Vector2(170, 145)),
@@ -20,7 +19,6 @@ class CoinAnimation extends StatelessWidget {
       height: 100,
       child: SpriteAnimationWidget(
         animation: _animation,
-        //playing: true,
         anchor: Anchor.center,
       ),
     );

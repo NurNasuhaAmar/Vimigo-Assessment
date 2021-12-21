@@ -36,98 +36,100 @@ class _IntroState extends State<Intro> {
           width: double.infinity,
           height: double.infinity,
           child: Container(
-            margin: EdgeInsets.only(bottom: 160, top: 60),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                  child: Image.asset(
-                    currentSlide.pathImage.toString(),
-                    matchTextDirection: true,
-                    height: 160,
-                    width: 160,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 3),
-                  child: Text(
-                    currentSlide.title.toString(),
-                    style: const TextStyle(color: Colors.black, fontSize: 25),
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 30,
-                  ),
-                  child: Text(
-                    currentSlide.description.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                      height: 1.5,
-                    ),
-                    maxLines: 3,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  margin: const EdgeInsets.only(
-                    top: 15,
-                    left: 20,
-                    right: 20,
-                  ),
-                ),
-                // Container(
-                //   alignment: Alignment.center,
-                //   margin: EdgeInsets.fromLTRB(60, 5, 60, 5),
-                //   child: ListTile(
-                //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                //     tileColor: Colors.red[600],
-                //     leading: Icon(Icons.sort, color: Colors.white,),
-                //     title: Text('Sort Contact',
-                //       style: TextStyle(color: Colors.white),),
-                //   ),
-                // ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.fromLTRB(60, 15, 60, 5),
-                  child: ListTile(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0)),
-                    tileColor: Colors.red[600],
-                    leading: const Icon(
-                      Icons.search,
+            margin: const EdgeInsets.only(bottom: 160, top: 60),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
                       color: Colors.white,
                     ),
-                    title: const Text(
-                      'Search Contact',
-                      style: TextStyle(color: Colors.white),
+                    child: Image.asset(
+                      currentSlide.pathImage.toString(),
+                      matchTextDirection: true,
+                      height: 160,
+                      width: 160,
                     ),
                   ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.fromLTRB(60, 10, 60, 5),
-                  child: ListTile(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0)),
-                    tileColor: Colors.red[600],
-                    leading: const Icon(
-                      Icons.add_call,
-                      color: Colors.white,
-                    ),
-                    title: const Text(
-                      'Add New Contact',
-                      style: TextStyle(color: Colors.white),
+                  Container(
+                    margin: const EdgeInsets.only(top: 3),
+                    child: Text(
+                      currentSlide.title.toString(),
+                      style: const TextStyle(color: Colors.black, fontSize: 25),
                     ),
                   ),
-                ),
-              ],
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    child: Text(
+                      currentSlide.description.toString(),
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                      maxLines: 3,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    margin: const EdgeInsets.only(
+                      top: 15,
+                      left: 20,
+                      right: 20,
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.fromLTRB(60, 5, 60, 5),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                      tileColor: Colors.red[600],
+                      leading: Icon(Icons.sort, color: Colors.white,),
+                      title: Text('Sort Contact',
+                        style: TextStyle(color: Colors.white),),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.fromLTRB(60, 15, 60, 5),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                      tileColor: Colors.red[600],
+                      leading: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                      title: const Text(
+                        'Search Contact',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.fromLTRB(60, 10, 60, 5),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                      tileColor: Colors.red[600],
+                      leading: const Icon(
+                        Icons.add_call,
+                        color: Colors.white,
+                      ),
+                      title: const Text(
+                        'Add New Contact',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

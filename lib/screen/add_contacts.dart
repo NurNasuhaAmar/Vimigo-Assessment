@@ -88,6 +88,7 @@ class _AddContactsState extends State<AddContacts> {
                 width: 200,
                 height: 50,
                 padding: const EdgeInsets.symmetric(horizontal : 10),
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                   child: const Text('Save Contact', style: TextStyle(
                       fontSize: 15,
@@ -122,10 +123,8 @@ class _AddContactsState extends State<AddContacts> {
       title: const Text('Successful'),
       content: const Text('Click OK to continue'),
       actions: <Widget>[
+        // ignore: deprecated_member_use
         FlatButton(onPressed: (){
-          // Navigator.push(context, MaterialPageRoute(builder: (_){
-          //   return Contacts();
-          // }));
           saveContact(context);
         },
             child: const Text('OK')
@@ -144,7 +143,7 @@ class _AddContactsState extends State<AddContacts> {
 
     final now = DateTime.now();
 
-    checkin = DateFormat('dd-MM-yyyy hh:mm').format(now);
+    checkin = DateFormat('d-MMM-y hh:mm').format(now);
 
     Map<String,String> contact = {
       'name':name,
@@ -153,10 +152,11 @@ class _AddContactsState extends State<AddContacts> {
     };
 
     _ref.push().set(contact).then((value) {
-      //Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(builder: (_){
-        return Contacts();
-      }));
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => Contacts()),
+            (Route<dynamic> route) => false,
+      );
     });
   }
 }
