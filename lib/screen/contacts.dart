@@ -57,6 +57,7 @@ class _ContactsState extends State<Contacts> {
                 Icons.account_circle,
                 color: Colors.red[600],
               ),
+              subtitle: Text(contact['checkin']),
             );
           }),
     );
@@ -146,33 +147,19 @@ class _ContactsState extends State<Contacts> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            SingleChildScrollView(
-              child: SizedBox(
-                height: 650,
-                child: buildList(),
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: buildList(),
     );
   }
 
   Widget buildList() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: FirebaseAnimatedList(
-          key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
-          query: _ref,
-          itemBuilder: (BuildContext context, DataSnapshot snapshot,Animation<double>animation,int index){
-          Map contact = snapshot.value;
-          contact['key'] = snapshot.key;
-          return _buildContactItem(contact: contact);
-        },
-      ),
+    return FirebaseAnimatedList(
+        key: Key(DateTime.now().millisecondsSinceEpoch.toString()),
+        query: _ref,
+        itemBuilder: (BuildContext context, DataSnapshot snapshot,Animation<double>animation,int index){
+        Map contact = snapshot.value;
+        contact['key'] = snapshot.key;
+        return _buildContactItem(contact: contact);
+      },
     );
   }
 

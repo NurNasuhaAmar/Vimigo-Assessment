@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_apptest3/screen/model.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_apptest3/screen/contacts.dart';
 import 'package:flutter_apptest3/screen/coin.dart';
+import 'package:http/http.dart' as http;
 
 
 class AddContacts extends StatefulWidget {
@@ -14,17 +18,48 @@ class AddContacts extends StatefulWidget {
 
 class _AddContactsState extends State<AddContacts> {
 
+  //late Future<Model> futureModel;
   late TextEditingController _nameController,_numberController;
   String checkin = '';
 
   late DatabaseReference _ref;
 
+  late Model model;
+  List<Results> list = <Results>[];
+
   @override
   void initState() {
     super.initState();
+    getDataFromApi();
+    //futureModel = fetchModel();
     _nameController = TextEditingController();
     _numberController = TextEditingController();
     _ref = FirebaseDatabase.instance.reference().child('Contacts');
+  }
+
+  // Future<Model> fetchModel() async {
+  //   final response = await http
+  //       .get(Uri.parse('https://randomuser.me/api/'));
+  //
+  //   if (response.statusCode == 200) {
+  //     // If the server did return a 200 OK response,
+  //     // then parse the JSON.
+  //     return Model.fromJson(jsonDecode(response.body));
+  //   } else {
+  //     // If the server did not return a 200 OK response,
+  //     // then throw an exception.
+  //     throw Exception('Failed to load model');
+  //   }
+  // }
+
+  Future getDataFromApi() async {
+    final url = await http.get(Uri.parse('https://randomuser.me/api/'));
+    //final url = await http.get("https://randomuser.me/api/");
+    model = Model.fromJson(jsonDecode(url.body));
+    setState(() {
+      list = model.results;
+    });
+
   }
 
   @override
@@ -105,12 +140,54 @@ class _AddContactsState extends State<AddContacts> {
                   color: Colors.red[600],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, bottom: 20),
+                child: Row(
+                    children: const <Widget>[
+                      Expanded(
+                          child: Divider(
+                            color: Colors.black,
+                            height: 50,
+                          )
+                      ),
+                      Text("  OR  "),
+                      Expanded(
+                          child: Divider(
+                            color: Colors.black,
+                            height: 50,
+                          )
+                      ),
+                    ]
+                ),
+              ),
+              Container(
+                width: 220,
+                height: 50,
+                padding: const EdgeInsets.symmetric(horizontal : 10),
+                // ignore: deprecated_member_use
+                child: RaisedButton(
+                  child: const Text('Generate Random User', style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600
+                  ),),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  onPressed: () {
+                    popupNotificationRandom(context);
+                    //saveContact();
+                  },
+                  color: Colors.red[600],
+                ),
+              ),
               const SizedBox(
                 height: 15,
               ),
-              //SpriteAnimationWidget(animation: _animation)
               const CoinAnimation(),
-              //Flame.util.animationAsWidget(Position(256, 256), animation.Animation.sequenced('animation.png', 20, textureWidth: 96))
+              const SizedBox(
+                height: 15,
+              ),
             ],
           ),
         ),
@@ -137,6 +214,25 @@ class _AddContactsState extends State<AddContacts> {
     //saveContact();
   }
 
+  void popupNotificationRandom(BuildContext context){
+    var alertDialog = AlertDialog(
+      title: const Text('Successful'),
+      content: const Text('Click OK to continue'),
+      actions: <Widget>[
+        // ignore: deprecated_member_use
+        FlatButton(onPressed: (){
+          generateContact(context);
+        },
+            child: const Text('OK')
+        ),
+      ],
+    );
+    showDialog(context: context, builder: (BuildContext context){
+      return alertDialog;
+    });
+    //saveContact();
+  }
+
   void saveContact(BuildContext context){
     String name = _nameController.text;
     String number = _numberController.text;
@@ -148,6 +244,31 @@ class _AddContactsState extends State<AddContacts> {
     Map<String,String> contact = {
       'name':name,
       'number': number,
+      'checkin': checkin,
+    };
+
+    _ref.push().set(contact).then((value) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => Contacts()),
+            (Route<dynamic> route) => false,
+      );
+    });
+  }
+
+  void generateContact(BuildContext context){
+    int i = 0;
+    final k = list[i];
+
+    final now = DateTime.now();
+
+    checkin = DateFormat('d-MMM-y hh:mm').format(now);
+
+    String name = k.name.first + ' ' + k.name.last;
+
+    Map<String,String> contact = {
+      'name': name,
+      'number': k.phone,
       'checkin': checkin,
     };
 

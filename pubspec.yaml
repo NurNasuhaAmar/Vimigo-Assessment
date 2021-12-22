@@ -42,6 +42,7 @@ dependencies:
   intl: ^0.17.0
   intro_slider: ^3.0.2
   flame: ^1.0.0
+  http: ^0.13.4
 
 
 dev_dependencies:
