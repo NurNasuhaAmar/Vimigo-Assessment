@@ -43,6 +43,7 @@ dependencies:
   intro_slider: ^3.0.2
   flame: ^1.0.0
   http: ^0.13.4
+  device_preview: ^1.0.0
 
 
 dev_dependencies:

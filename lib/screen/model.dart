@@ -125,22 +125,22 @@ class Name {
 }
 
 class Location {
-  late Street street;
-  late String city;
-  late String state;
-  late String country;
-  late int postcode;
-  late Coordinates coordinates;
-  late Timezone timezone;
+  Street? street;
+  String? city;
+  String? state;
+  String? country;
+  String? postcode;
+  Coordinates? coordinates;
+  Timezone? timezone;
 
   Location(
-      {required this.street,
-        required this.city,
-        required this.state,
-        required this.country,
-        required this.postcode,
-        required this.coordinates,
-        required this.timezone});
+      {this.street,
+        this.city,
+        this.state,
+        this.country,
+        this.postcode,
+        this.coordinates,
+        this.timezone});
 
   Location.fromJson(Map<String, dynamic> json) {
     street =
@@ -148,7 +148,7 @@ class Location {
     city = json['city'];
     state = json['state'];
     country = json['country'];
-    postcode = json['postcode'];
+    postcode = json['postcode'].toString();
     coordinates = (json['coordinates'] != null
         ? Coordinates.fromJson(json['coordinates'])
         : null)!;
@@ -160,17 +160,17 @@ class Location {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.street != null) {
-      data['street'] = this.street.toJson();
+      data['street'] = this.street!.toJson();
     }
     data['city'] = this.city;
     data['state'] = this.state;
     data['country'] = this.country;
     data['postcode'] = this.postcode;
     if (this.coordinates != null) {
-      data['coordinates'] = this.coordinates.toJson();
+      data['coordinates'] = this.coordinates!.toJson();
     }
     if (this.timezone != null) {
-      data['timezone'] = this.timezone.toJson();
+      data['timezone'] = timezone!.toJson();
     }
     return data;
   }
@@ -294,10 +294,10 @@ class Dob {
 }
 
 class Id {
-  late String name;
-  late String value;
+  String? name;
+  String? value;
 
-  Id({required this.name, required this.value});
+  Id({this.name, this.value});
 
   Id.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -335,12 +335,12 @@ class Picture {
 }
 
 class Info {
-  late String seed;
-  late int results;
-  late int page;
-  late String version;
+  String? seed;
+  int? results;
+  int? page;
+  String? version;
 
-  Info({required this.seed, required this.results, required this.page, required this.version});
+  Info({this.seed, this.results, this.page, this.version});
 
   Info.fromJson(Map<String, dynamic> json) {
     seed = json['seed'];

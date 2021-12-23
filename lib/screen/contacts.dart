@@ -27,7 +27,7 @@ class _ContactsState extends State<Contacts> {
     _ref.once().then((DataSnapshot snapshot){
       Map<dynamic, dynamic> values = snapshot.value;
       values.forEach((key, value) {
-        print(value['name']);
+        //print(value['name']);
         //userList.add(values['name']);
       });
     });
@@ -39,7 +39,6 @@ class _ContactsState extends State<Contacts> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(5),
-      height: 70,
       color: Colors.white,
       child: ListView.builder(
         shrinkWrap: true,

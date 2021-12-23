@@ -37,25 +37,11 @@ class _AddContactsState extends State<AddContacts> {
     _ref = FirebaseDatabase.instance.reference().child('Contacts');
   }
 
-  // Future<Model> fetchModel() async {
-  //   final response = await http
-  //       .get(Uri.parse('https://randomuser.me/api/'));
-  //
-  //   if (response.statusCode == 200) {
-  //     // If the server did return a 200 OK response,
-  //     // then parse the JSON.
-  //     return Model.fromJson(jsonDecode(response.body));
-  //   } else {
-  //     // If the server did not return a 200 OK response,
-  //     // then throw an exception.
-  //     throw Exception('Failed to load model');
-  //   }
-  // }
-
   Future getDataFromApi() async {
     final url = await http.get(Uri.parse('https://randomuser.me/api/'));
     //final url = await http.get("https://randomuser.me/api/");
     model = Model.fromJson(jsonDecode(url.body));
+    //print(url.body);
     setState(() {
       list = model.results;
     });
@@ -259,7 +245,6 @@ class _AddContactsState extends State<AddContacts> {
   void generateContact(BuildContext context){
     int i = 0;
     final k = list[i];
-
     final now = DateTime.now();
 
     checkin = DateFormat('d-MMM-y hh:mm').format(now);
